@@ -1,0 +1,638 @@
+-- this is single line comment
+
+/*
+this is multiline comment
+*/
+
+/*
+Created By  : Writer Name
+Create Date : MM/DD/YYYY
+Description : The structure of the basic query
+*/
+
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/19/2025
+Description : The query displays all customer FirstName, 
+              LastName and Email address.
+*/
+
+/* 
+SELECT
+	FirstName,
+	LastName,
+	Email
+FROM
+	Customer
+*/
+
+-- Using Alias (Using AS to create new heading)
+/*
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS 'Customer Last Name',
+	Email AS EMAIL
+FROM
+	Customer
+ORDER BY
+	FirstName ASC,
+	LastName DESC
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/19/2025
+Description : The query Generate a report listing track names 
+              along side their UnitPrice.
+*/
+/*
+SELECT
+	t.Name AS "Track Name",
+	t.UnitPrice AS Price
+FROM
+	Track AS t
+ORDER BY
+	t.Name
+LIMIT 20;
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/19/2025
+Description : How many customers purchase two songs at $0.99 each?
+*/
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total = 1.98
+ORDER BY
+	InvoiceDate
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/19/2025
+Description : How many invoices exist between $1.98 and $5.00?
+*/
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total BETWEEN 1.98 AND 5.00
+ORDER BY
+	InvoiceDate
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : How many invoices do we have that are exactly $1.98 or $3.96?
+*/
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total IN(1.98,3.96)
+ORDER BY
+	InvoiceDate
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : How many invoices were billed to Brussels?
+*/
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity = 'Brussels'
+ORDER BY
+	InvoiceDate
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : How many invoices were billed to Brussels, Orlando, or Paris?
+*/
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity IN('Brussels', 'Orlando', 'Paris')
+ORDER BY
+	InvoiceDate
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : How many invoices were billed in the cities that start with B?
+*/
+
+-- The % sign is the wildcard character
+-- % i don’t care what comes next
+-- Using LIKE
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE 'B%'
+ORDER BY
+	InvoiceDate
+*/
+/*
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : How many invoices were billed in the cities that have a B anywhere in its name?
+*/
+
+-- % i don’t care what comes next or before
+-- Using LIKE
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE '%B%'
+ORDER BY
+	InvoiceDate
+*/
+/* 12
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : How many invoices were billed on 2010-05-22 00:00:00 (May 22, 2010)?
+*/
+/*
+-- Using =
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	InvoiceDate = '2010-05-22 00:00:00'
+ORDER BY
+	InvoiceDate
+*/
+/* 13
+Created By  : Deepa Ponnusamy
+Create Date : 03/21/2025
+Description : Get all invoices billed after 2010-05-22 and have a total of less than 3.00?
+*/
+/*
+-- Using =
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	DATE(InvoiceDate) > '2010-05-22' AND total < 3.00
+ORDER BY
+	InvoiceDate
+*/
+/* 14
+Created By  : Deepa Ponnusamy
+Create Date : 03/24/2025
+Description : Get all invoices who’s billing city is start with P or start with D?
+*/
+
+-- % i don’t care what comes next or before
+-- Using LIKE
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE 'P%' OR BillingCity LIKE'D%' 
+ORDER BY
+	InvoiceDate
+*/
+/* 15
+Created By  : Deepa Ponnusamy
+Create Date : 03/24/2025
+Description : Get all invoices that are greater than 1.98 from any cities whose names start with P or start with D?
+*/
+
+-- % i don’t care what comes next or before
+-- Using LIKE
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total > 1.98 AND (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%') 
+ORDER BY
+	InvoiceDate
+*/
+/* 16
+Created By  : Deepa Ponnusamy
+Create Date : 03/24/2025
+Description :  WSDA Music Sales Goal:  They want as many customers as possible to spend between $7.00 and $ 15.00
+Sales Categories:
+Baseline Purchase 	- 	Between $0.99 and $1.99
+Low Purchase 		- 	Between $2.00 and $6.99
+Target Purchase 	- 	Between $7.00 and $15.00
+Top Performer		- 	Above$15.00
+*/
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total,
+	CASE
+	WHEN total < 2.00 THEN 'Baseline Purchase'
+	WHEN total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+	WHEN total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+	ELSE  'Top Performer'
+	END AS PurchseType
+FROM
+	Invoice
+ORDER BY
+	BillingCity
+*/
+--WSDA Music Sales Goal:  They want as many customers as possible to spend between $7.00 and $ 15.00
+/*
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total,
+	CASE
+	WHEN total < 2.00 THEN 'Baseline Purchase'
+	WHEN total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+	WHEN total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+	ELSE  'Top Performer'
+	END AS PurchseType
+FROM
+	Invoice
+WHERE
+	PurchseType = 'Top Performer'
+ORDER BY
+	BillingCity
+*/
+
+/* 18
+Created By  : Deepa Ponnusamy
+Create Date : 03/27/2025
+Description :  JOINS  (Inner Join) */
+/*
+SELECT
+	c.LastName,
+	c.FirstName,
+	i.InvoiceId,
+	i.CustomerId,
+	i.InvoiceDate,
+	i.total
+FROM 
+	Invoice AS i
+INNER JOIN
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+ORDER BY
+	c.CustomerId
+*/
+/* 19
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description :  JOINS  (Left Outer Join) */
+/*
+SELECT
+	i.InvoiceId,
+	c.CustomerId,
+	c.FirstName,
+	c.LastName,
+	i.InvoiceDate,
+	i.BillingAddress,
+	i.total
+FROM 
+	Invoice AS i
+LEFT OUTER JOIN
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+*/
+/* 20
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description :  JOINS  (Right Outer Join) */
+/*
+SELECT
+	i.InvoiceId,
+	c.CustomerId,
+	c.FirstName,
+	c.LastName,
+	c.Address,
+	i.InvoiceDate,
+	i.BillingAddress,
+	i.total
+FROM 
+	Invoice AS i
+RIGHT OUTER JOIN
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+*/
+/* 21
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description : (Join on more than 2 tables) What employees are responsible for the 10 highest individual sales?
+ */
+/*
+SELECT
+	e.FirstName,
+	e.LastName,
+	e.EmployeeId,
+	c.FirstName,
+	c.LastName,
+	c.SupportRepId,
+	i.CustomerId,
+	i.total
+FROM 
+	Invoice AS i
+INNER JOIN
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+INNER JOIN
+	Employee AS e
+ON
+	c.SupportRepId = e.EmployeeID
+ORDER BY
+i.total DESC
+LIMIT 10
+*/
+/* 22
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description :Write a SQL query to generate a report that lists each customer along with their assigned support representative.
+ */
+/*
+SELECT
+   c.FirstName AS CustomerFirstName,
+   c.LastName AS CustomerLastName,
+   e.FirstName AS SupportRepFirstName,
+   e.LastName AS SupportRepLastName
+FROM
+   Customer AS c
+JOIN
+   Employee AS e
+ON
+   c.SupportRepID = e.EmployeeId
+ORDER BY
+   e.LastName, c.LastName;
+*/
+/* 23
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description :Creating a Mailing list of US Customer. 
+ */
+/*
+SELECT
+	FirstName,
+	LastName,
+	Address
+FROM
+	Customer 
+WHERE
+	Country =  'USA'
+*/
+/* 24
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description :Creating a Mailing list of US Customer. 
+ */
+/*
+SELECT
+	FirstName,
+	LastName,
+	Address,
+   FirstName ||'  ' || LastName || '  ' || Address || ' , ' || City || '  ' || State || '  ' ||PostalCode AS [Mailing Address]   
+FROM
+   Customer 
+WHERE
+	Country =  'USA'
+*/
+/* 25
+Created By  : Deepa Ponnusamy
+Create Date : 03/28/2025
+Description :Creating a Mailing list of US Customer. 
+ */
+/*
+SELECT
+   	FirstName ||'  ' || LastName || '  ' || Address || ' , ' || City || '  ' || State || '  ' ||PostalCode AS [Mailing Address],   
+	LENGTH(PostalCode) AS "Length(PostalCode)",
+	SUBSTR(PostalCode, 1,5) AS "5 Digit PostalCode"
+FROM
+   Customer 
+WHERE
+	Country =  'USA'
+*/
+/*
+SELECT
+   	FirstName ||'  ' || LastName || '  ' || Address || ' , ' || City || '  ' || State || '  ' ||PostalCode AS [Mailing Address],   
+	LENGTH(PostalCode),
+	SUBSTR(PostalCode, 1, 5) AS [5 Digit PostalCode],
+	UPPER(FirstName) AS [FirstName All Caps],
+	LOWER(LastName) AS [LastName All Lower]
+FROM
+   Customer 
+WHERE
+	Country =  'USA'
+*/
+/* 26
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : We can leverage the birthday field to calculate each employee age. 
+ */
+/*
+ SELECT
+  	FirstName,
+  	LastName,
+	BirthDate,
+strftime( "%Y-%m-%d", BirthDate) AS [BirthDate No TimeCode],
+strftime("%Y-%m-%d", 'now') - strftime("%Y-%m-%d", BirthDate) AS Age,	
+(strftime('%Y', 'now') - strftime('%Y', BirthDate)) - 
+    (strftime('%m-%d', 'now') < strftime('%m-%d', BirthDate)) AS Age1
+FROM
+   Employee 
+*/
+/* 27
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Aggregate Function | What are our all time global sales?. 
+ */
+/*
+SELECT
+	SUM(Total) AS [Total Sales],
+	AVG(Total) AS [Average Sales],
+	MAX(Total) AS [Maximum Sale],
+	MIN(Total) AS [Minimum Sale],
+	COUNT(*) AS [Sales Count]
+FROM
+   Invoice
+*/
+/* 28
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Nesting Agrigate Function | What are our all time global sales?. 
+ */
+/*
+SELECT
+	SUM(Total) AS [Total Sales],
+	ROUND(AVG(Total),2) AS [Average Sales],
+	MAX(Total) AS [Maximum Sale],
+	MIN(Total) AS [Minimum Sale],
+	COUNT(*) AS [Sales Count]
+FROM
+   Invoice
+*/
+/* 29
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Create Alias Customer table, first and last name combine as customer fullname, limit postal code into 5 digits. 
+ */
+/*
+SELECT
+   c.FirstName||' '|| c.LastName AS CustomerFullName,
+   SUBSTR(c.PostalCode, 1, 5) AS StandardizedPostalCode
+FROM
+   Customer AS c
+WHERE
+   c.Country = 'USA'
+ORDER BY
+   CustomerFullName;
+*/
+/* 30
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Grouping Function | What are the average invoice totals by city?. 
+ */
+/*
+SELECT
+	BillingCity,
+	ROUND(AVG(Total),2)	
+FROM
+   Invoice
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity
+*/
+/* 31
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Grouping Function | What are the average invoice totals by cities that start with L?. 
+ */
+/*
+SELECT
+	BillingCity,
+	ROUND(AVG(Total),2)	
+FROM
+   Invoice
+WHERE
+	BillingCity LIKE 'L%'
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity
+*/
+/* 32
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Grouping Function | What are the average invoice totals greater than $5.00? 
+ */
+/*
+SELECT
+	BillingCity,
+	ROUND(AVG(Total),2)	
+FROM
+   Invoice
+GROUP BY
+	BillingCity
+HAVING
+	AVG(Total) > 5
+ORDER BY
+	BillingCity
+*/
+/* 33
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Grouping Function | What are the average invoice totals greater than $5.00 for cities starting with B? 
+ */
+/*
+SELECT
+	BillingCity,
+	ROUND(AVG(Total),2)	
+FROM
+   Invoice
+WHERE
+	BillingCity LIKE 'B%'
+GROUP BY
+	BillingCity
+HAVING
+	AVG(Total) > 5
+ORDER BY
+	BillingCity
+*/
+/* 33
+Created By  : Deepa Ponnusamy
+Create Date : 03/30/2025
+Description : Grouping Function | What are the average invoice totals by billing country and city? 
+ */
+
+
+SELECT
+	BillingCountry,
+	BillingCity,
+	ROUND(AVG(Total),2)	
+FROM
+   Invoice
+GROUP BY
+	BillingCountry, BillingCity
+ORDER BY
+	BillingCountry

@@ -1,0 +1,46 @@
+--Questione1
+/*
+SELECT
+	t.Name AS "Track Name",
+	t.UnitPrice AS Price
+FROM
+	Track AS t
+ORDER BY
+	t.Name
+LIMIT 20;
+*/
+--SELECT * FROM Track
+
+--Questione2
+/*
+SELECT 
+    t.Name AS "Track Name",
+    t.Composer,
+	t.UnitPrice AS "PRICE",
+    CASE 
+		WHEN t.UnitPrice <= 0.99 THEN 'Budget'
+		WHEN t.UnitPrice BETWEEN 1.00 AND 1.49 THEN 'Regular'		
+		WHEN t.UnitPrice BETWEEN 1.50 AND 1.99 THEN 'Premium'
+	ELSE 'Exclusive'
+	END AS "PRICECATEGORY"
+FROM 
+    Track AS t
+ORDER BY
+	t.UnitPrice ASC;
+*/
+/*
+SELECT 
+    Name AS "Track Name",
+    Composer,
+	UnitPrice AS Price,
+    CASE 
+		WHEN UnitPrice <= 0.99 THEN 'Budget'
+		WHEN UnitPrice > 0.99 AND UnitPrice <= 1.49 THEN 'Regular'		
+		WHEN UnitPrice > 1.49 AND UnitPrice <= 1.99 THEN 'Premium'
+	ELSE 'Exclusive'
+	END AS PriceCategory
+FROM 
+    Track 
+ORDER BY
+	UnitPrice ASC;	
+*/
